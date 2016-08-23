@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	 http://www.springframework.org/schema/beans/spring-beans.xsd
+     	 http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx
+     	 http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="userDao" class="com.cx.nsfw.user.dao.impl.UserDaoImpl" parent="baseDao">
+        <!--注入sessionFactory-->
+    </bean>
+
+    <!--给子类注入sessionFactory , 抽象的bean,用了bean的继承-->
+    <bean id="baseDao" abstract="true">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <!--开启service中的注解扫描-->
+    <context:component-scan base-package="com.cx.nsfw.user.service.impl"></context:component-scan>
+
+</beans>
